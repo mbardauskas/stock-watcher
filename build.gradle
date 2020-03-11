@@ -1,0 +1,42 @@
+buildscript {
+    ext.kotlin_version = '1.3.61'
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'application'
+
+defaultTasks 'run'
+
+mainClassName = 'main.kotlin.StockWatcher.AppKt'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main.kotlin.srcDirs += 'src/main/kotlin'
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.10.+"
+    testImplementation(
+            'org.assertj:assertj-core:3.13.2',
+            'org.junit.jupiter:junit-jupiter-api:5.4.2'
+    )
+    testRuntime('org.junit.jupiter:junit-jupiter-engine:5.4.2')
+}
+
+test {
+    //useTestNG()
+    useJUnitPlatform()
+}
