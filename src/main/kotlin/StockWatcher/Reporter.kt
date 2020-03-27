@@ -1,18 +1,18 @@
-package main.kotlin.StockWatcher
+package main.kotlin.stockWatcher
 
 import java.util.*
 import javax.mail.*
 import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
 
-class Reporter(val host: String, val username: String, val password: String, val recipient: String) {
+class Reporter(private val host: String, val username: String, val password: String, private val recipient: String) {
     private fun getSession(): Session {
         val prop: Properties = System.getProperties()
         prop.setProperty("mail.smtp.host", host)
-        prop.setProperty("mail.smtp.port", "465");
-        prop.setProperty("mail.smtp.auth", "true");
-        prop.setProperty("mail.smtp.socketFactory.port", "465");
-        prop.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        prop.setProperty("mail.smtp.port", "465")
+        prop.setProperty("mail.smtp.auth", "true")
+        prop.setProperty("mail.smtp.socketFactory.port", "465")
+        prop.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory")
 
         return Session.getInstance(prop,
             object : Authenticator() {
@@ -30,7 +30,7 @@ class Reporter(val host: String, val username: String, val password: String, val
                 Message.RecipientType.TO,
                 InternetAddress.parse(recipient, false)
             )
-            message.setSubject("Stock price: $symbol $price")
+            message.subject = "Stock price: $symbol $price"
             message.setText("Stock price: $symbol $price")
             Transport.send(message)
         } catch (e: MessagingException) {

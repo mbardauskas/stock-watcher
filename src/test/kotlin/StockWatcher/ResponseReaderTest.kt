@@ -1,5 +1,5 @@
-import main.kotlin.StockWatcher.Stock
-import main.kotlin.StockWatcher.ResponseReader
+package main.kotlin.stockWatcher
+
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

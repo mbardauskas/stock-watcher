@@ -1,4 +1,4 @@
-package main.kotlin.StockWatcher
+package main.kotlin.stockWatcher
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
