@@ -32,7 +32,8 @@ dependencies {
     compile "com.sun.mail:javax.mail:1.6.+"
     testImplementation(
             'org.assertj:assertj-core:3.13.2',
-            'org.junit.jupiter:junit-jupiter-api:5.4.2'
+            'org.junit.jupiter:junit-jupiter-api:5.4.2',
+            'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
     )
     testRuntime('org.junit.jupiter:junit-jupiter-engine:5.4.2')
 }
