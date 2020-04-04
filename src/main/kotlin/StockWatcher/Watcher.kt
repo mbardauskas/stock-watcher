@@ -1,9 +1,11 @@
 package main.kotlin.stockWatcher
 
 import kotlin.concurrent.fixedRateTimer
+import kotlin.math.abs
+import kotlin.math.floor
 
 
-class Watcher (private val reporter: Reporter, private val intervalInSeconds: Int, private val api: Api) {
+class Watcher (private val reporter: Reporter, private val intervalInSeconds: Int, private val api: StockApi) {
     private val trackedSymbols: MutableMap<String, Double> = mutableMapOf()
     fun watchSymbols(symbols: List<String>) {
         val interval = intervalInSeconds*1000.toLong()
@@ -22,7 +24,7 @@ class Watcher (private val reporter: Reporter, private val intervalInSeconds: In
             val currentPrice = trackedSymbols[it.symbol]!!
             if (shouldBeUpdated(currentPrice, it.price)) {
                 trackedSymbols[it.symbol] = roundTo5(it.price)
-                reporter.sendPrice(symbol = it.symbol, price = it.price.toString())
+                reporter.sendReport(symbol = it.symbol, price = it.price.toString())
             }
         }
     }
@@ -42,5 +44,5 @@ fun shouldBeUpdated(existing: Double, new: Double): Boolean {
 }
 
 fun roundTo5(num: Double): Double {
-    return 5*(Math.floor(Math.abs(num/5)))
+    return 5*(floor(abs(num/5)))
 }

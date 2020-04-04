@@ -5,7 +5,11 @@ import javax.mail.*
 import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
 
-class Reporter(private val host: String, val username: String, val password: String, private val recipient: String) {
+interface Reporter {
+    fun sendReport(symbol: String, price: String)
+}
+
+class EmailReporter(private val host: String, val username: String, val password: String, private val recipient: String): Reporter {
     private fun getSession(): Session {
         val prop: Properties = System.getProperties()
         prop.setProperty("mail.smtp.host", host)
@@ -21,7 +25,7 @@ class Reporter(private val host: String, val username: String, val password: Str
                 }
             })
     }
-    fun sendPrice(symbol: String, price: String) {
+    override fun sendReport(symbol: String, price: String) {
         val message: Message = MimeMessage(getSession())
 
         try {

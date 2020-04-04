@@ -5,7 +5,9 @@ fun main(args: Array<String>) {
     val user = args[1]
     val password = args[2]
     val recipient = args[3]
-    val reporter = Reporter(mailServerHost, user, password, recipient)
+    val reporter = EmailReporter(mailServerHost, user, password, recipient)
+
+    // @TODO: Add logger
 
     val watcher = Watcher(reporter, 10, Api())
     watcher.watchSymbols(listOf("WIX"))

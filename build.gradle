@@ -16,7 +16,7 @@ apply plugin: 'application'
 
 defaultTasks 'run'
 
-mainClassName = 'main.kotlin.StockWatcher.AppKt'
+mainClassName = 'main.kotlin.stockWatcher.AppKt'
 
 repositories {
     mavenCentral()
